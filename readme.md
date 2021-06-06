@@ -333,3 +333,55 @@ ReactDOM.render(<App />, document.getElementById('root'));
 4. This is the Entry point to our code and readers will know where to start
 
 5. This is usually the only rendered on index.js
+
+
+
+## Properties aka props
+--
+
+1. A usefule component is a reusable one. This often means making it configurable or customizeable
+
+2. For our example next, we want to render a greeting, "hi __ from __".
+    - Lets make 2 properties, to and from
+        - to 
+            - Who we are greeting
+        - from
+            - Who our greeting is from 
+
+3. Passing data down
+    - In our index.js we have ``<Hello />`` twice
+    - We can pass our properties down by adding them to the tag
+    - Lets add a value to each to test
+``<Hello to="Ringo" from="Paul" />``
+
+4. Inside our Hello.js
+    - remember classes prefer 'this' when working with props
+    - sometimes you may runto people using props = this.propss
+    - Lets use {this.props.to} to tap into the 'to' prop
+    - Lets use {this.props.from} to tap into the 'from' prop
+
+5. View the live server
+
+6. Props are Immutable?
+    - Properties are for configuring your component
+    - Properties are immutable
+        - You can't say 'this.props.page = 10' because its immutable
+    - Changing data and values there are other ways but PROPS are immutable
+
+7. Property Types
+    - We've seen strings as props
+    - We can pass other JS data types using embedded js express using the curly braces
+    - functions
+    - arrays
+    - boolean (both are the same)
+        - isFunny=true
+        - isFunny
+    - number 
+        - bangs={10}
+        - let bangs = "!".repeat(this.props.bangs)
+        
+    - image
+        - img={"url"}
+        - ``<img src= {this.props.img} />``
+    
+8. 
