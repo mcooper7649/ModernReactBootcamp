@@ -444,7 +444,7 @@ class Friend extends React.Component {
 
 1. What are default values for props?
     - Components can specify default values for missing props
-        - All we do is define an object called 'defaultProps'
+        - All we do is define an object called static 'defaultProps'
             - We put key/value pairs inside our defaultPropts
     
 2. Why would we use defaultProps?
@@ -453,4 +453,76 @@ class Friend extends React.Component {
         - We can specify a deafultProp of "Anonymous" and now it will at least display something.
             - this can be used many other ways, this is just one example
 
-3. 
+
+## Styling React
+--
+
+1. First we want to add a css stylesheet using the same code we normally would to our index.html except the ``href='app.css'``
+    ``<link rel="stylesheet" href="app.css">
+
+2. Adding the class properties are the same on the app.css side of things
+
+app.css
+```
+.Machine {
+	border: 2px solid black;
+	background: lightblue;
+}
+```
+
+3. Inside our Machine.js we want to add the class using
+``className="Machine"`` instead of the hold ``class="Machine"`` like we used before in normal HTML.
+- This generates DOM errors in the console
+- class is a reserved words, remember class functions
+
+4. Another notable change, is the ``for``, like the for property used in forms/labels. You will get more DOM errors. use htmlFor instead.
+
+5. The style property
+    - The inline style property can utilized still for styling but it now takes a JS object
+    
+6. What do we need to know about this object?
+    ``<p style={{fontSize: '50px'}}>``
+- Notice in our above example, when we need to inline style we pass an object
+- Notice we use camelCase to set the key value pair
+- Remember you can and may see people create a const for our styles and call it with jsx
+
+Commong Styling useing const example
+``const colors = {fontSize: '50px'}``
+``<p style ={colors} >``
+
+7. For our SLOT MACHINE example
+    - We can use ternirary operator to apply our classes 'Win' or 'Lose'
+
+app.css
+```
+.win {
+	background: green;
+	color: white;
+}
+.lose {
+	color: white;
+	background: red;
+}
+```
+
+machine.js
+```
+render() {
+		const { s1, s2, s3 } = this.props;
+		const winner = s1 === s2 && s2 === s3;
+		const colors = { fontSize: '50px', backgroundColor: 'purple' };
+
+		return (
+			<div className="Machine">
+				<p style={colors}>
+					{s1} {s2} {s3}
+				</p>
+				<p className={winner ? 'win' : 'lose'}>
+				{winner ? 'Winner!' : 'Loser!'}
+				</p>
+			</div>
+		);
+	}
+```
+
+- In our code above you can see the ``<p>`` tag has 2 ternirary that both reference our const 'winner', and will apply a class and text accordingly
