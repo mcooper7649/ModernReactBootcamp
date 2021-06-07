@@ -526,3 +526,239 @@ render() {
 ```
 
 - In our code above you can see the ``<p>`` tag has 2 ternirary that both reference our const 'winner', and will apply a class and text accordingly
+
+
+
+
+## Create React App
+--
+
+1. What is Create React App?
+    - CRA is a utility script that:
+        - Creates a skeleton react project
+        - Sets it up so that JS fiels are run through Babel Automatically
+        - Lets us use super-modern JavaScript features/idioms
+        - Makes testing & deployment much easier
+
+2. Before we get started.
+    - Node will need to be installed (I have it already)
+    - node -v to check node version
+    - npm -v to check npm version
+
+3. Lets get get started
+    - ``npx create-react-app my_app_hellooooo``
+    - This example above is how we use npm/npx and CRA to create our first app
+    - Remember names must be all lower case
+    
+4. Alternativly if you have the "Create-React-App" Package installed you can type:
+``create-react-app app-name``
+- This will also spin up a project skeleton in the current directory
+
+5. ``npm start`` from console, inside working directory, to start up our localhost development server
+
+
+6. Want to see the complete list of commands available with CRA?
+    - inside the skeleton project view the README.md and you can see all the additional commands and what they do
+
+7. Our directory structure
+    - you can se now we have node_modulees (we rarely touch)
+    - public (stores our index.html)
+        - we aren't usually modifying these files
+    - src (this is where we spend the bulk of our time)
+        - App.css
+        - App.js
+        - App.test.js
+        - index.js
+        - logo.svg
+        - serviceWorker.js
+    - .gitignore
+        - /node_modules
+    - package.json
+        - dependencies 
+    - README, usually you replace this after you app is ready.
+
+8. Starting and Stopping our server
+    - ``npm start``  // This starts the server 
+        - opens localhost:3000 in a default browser
+        - On the Network is great for collaboration
+
+
+example output of npm start:
+
+```
+Compiled successfully!
+
+You can now view my_app_helloworld in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://192.168.1.64:3000
+```
+
+## CRA and Webpack
+--
+
+1. CRA is built on top of "Webpack", a JS utility that:
+    - Enables module importing/exporting
+        - Packages up all CSS/images/JS into a single file for browser
+        - Dramatically reduces # of HTTP reqeusts for performace
+    - Hot reloading: 
+        - When you change a source file it automatically reloads
+    - Enables easy testing and deployment!
+
+## Modules: Import & Export Crash Course
+--
+
+1. Modules
+    - CRA uses es2015 "modules"
+        - This a newer, standardized version of Node's require()
+        - You use this to export/import classes/data/functions between files
+
+2. How to export helpful.js
+    - View our example below
+        - its set as the default, the only export for this file
+
+helpers.js
+```
+function helpful(){
+    console.log("hi")
+}
+
+export default helpful
+
+```
+
+3. How to import helpful to index.js
+    - Take note ./ after the from, this tells it to look in the fold hierarchy and NOT the node_modules
+    - another note, the container helpful doesn't need to be named helpful, it could be h or whatever you like, because helpful was the default export for helpers
+    
+index.js
+```
+import helpful from './helpers'
+helpful();
+```
+
+4. What if we have alot of functions? and want to export more than one?
+    - ``export {helpful, helpful2, helpful3};``
+        - This lets you specifically export named functions
+    - `` import {helpful, helpful3} from './helpers';``
+        - This lets you import specifically named functions
+
+5. Can you have a default and name specific functions?
+    - yes
+        - ``export { helpful2, helpful3};``
+        - ``export default helpful;``
+        - `` import helpful, {helpful2, helpful3);``
+
+5. The most common import we will see is something like this
+    - ``import React, {Component} from 'react'``
+        - This again, imports React as the default
+        - This will import Component individiually from react
+
+6. When to use default
+    - Conventionally, default exports are used when theres a "most likely" thing to export
+    - For example, in a React Component file, its common to have the component be the default export
+    - You never need to make a default export, but it can be helpful to indicate the most important thing in a file
+
+
+## Fruits Exerices Module
+---
+
+1. In this module we want to use CRA to create new project
+2. Next we want to create 3 files only in our src folder and delete everything else in that folder
+    - foods.js
+    - helpers.js
+    - index.js
+3. We want foods to be an array of foods 
+    - We want to export this as default
+4. We want helpers to be two functions
+    - choice
+        - Chooses a fruit randomly
+    - remove
+        - looks through items array for item and removes if its in the array
+        - The logic actually slices everything before our index item and everything after
+        - then it combines the two back together with out the item
+
+foods.js
+```
+const foods = ["apples", "oranges", "tomatoes", "pears", "grapes", "kiwis", "strawberrys", "watermelon"];
+
+
+export default foods;
+```
+
+helpers.js
+```
+function choice(items){
+    var index = Math.floor(Math.random() * items.length);
+
+    
+    return items[index]
+}
+
+function remove(items, item){
+    for (let i = 0; i< items.length; i++){
+        if(item[i] === item){
+            return [ ...items.slice(0, i), ...items.slice(i+1) ];
+        }
+    }
+}
+
+export {choice, remove};
+```
+
+index.js
+```
+import foods from './foods'
+import {choice, remove } from './helpers'
+
+let fruit = choice (foods);
+
+console.log(`I'd like one ${fruit}, please.`);
+console.log(`Here you go: ${fruit}`)
+
+console.log("May I have another?");
+
+let remaining = remove(foods, fruit);
+
+console.log(`I'm sorry we're all out. We have ${remaining.length} other foods left.`)
+```
+
+- CRA Conventions
+    - Conventions are commong styling you will see
+    - For example
+        - Each React Component goes in a seperate file
+            - src/Car.js for Car Component
+            - src/House.js for House Component
+            - notice the names match and the name is Capitalized
+    - Components EXTEND Component (import from React)
+        - Export the component as the default object
+    - Skeleton assumes top object is App in App.js
+        - Best to keep this structure
+
+
+## Assets and CRA
+--
+
+1. When we create a NEW CRA from scratch
+    - we may notice ``import logo from "./logo.svg"``
+    - We may also notice ``import "./app.css"``
+
+2. CSS
+    - Make a CSS file for each React component
+    - House.css for a Hosue component
+    - Import it at the top of the House.js
+        - CRA will automatically load that CSS
+    - Conventional to add ``className="House"`` onto House div
+        - and use that as a prefix for sub-items to styles
+    - This makes it much more clearer to read the styles for other developers
+    - Remember - When importing a css file no variable name is needed, just ``import ./Dog.css``
+    - After imported we can apply the className="Dog" and the colors will still to the child elements
+    - Also NOTE. don't use general names of classes like div, you can import and can run into styling conflicts because its imported everywhere
+        - You can fix that with scoping tools
+
+3. Images
+    - Store image in src/folder with the components (usually you would create an images folder inside your src )
+    - Load them where needed and use imported naem where path should go
+        -  ``import logo from "./logo.svg"``
+        - ``<img src={logo} />``
+        - If i wanted to apply a className to this image next I would use ``Dog-img`` as it lets us differientiate our component/classes
