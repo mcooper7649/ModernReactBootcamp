@@ -384,4 +384,73 @@ ReactDOM.render(<App />, document.getElementById('root'));
         - img={"url"}
         - ``<img src= {this.props.img} />``
     
-8. 
+8. Looping in JSX
+    - The most common way to loop through arrays youll see is using map.
+    
+    - Take a look at our examples below
+    
+    - We pass our name string props and our hobbies array (using {}) from our index.js
+
+index.js 
+```
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Friend
+          name="Elton"
+          hobbies={['Piano', 'Singing', 'Dancing']}
+        />
+        <Friend
+          name="Frida"
+          hobbies={['Drawing', 'Painting']}
+        />
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))
+```
+
+9. Next we take our props and assign a const using hte same name as the props while dropping this.props, using es6
+``const { name, hobbies } = this.props;``
+
+10. Last we can use the map method to map each hobbie and create an li for each hobby per user. make sure to wrap {h} because it needs to be dynamic and without will just render 'h'.
+
+11. Bonus note, you can create a const for our ``{hobbies.map(h => <li>{h}</li>)}`` and {} the const if you want to have the same output with a little cleaner code.
+
+Friend.js
+
+```
+class Friend extends React.Component {
+  render() {
+    const { name, hobbies } = this.props;
+
+    return (
+      <div>
+        <h1>{name}</h1>
+        <ul>
+          {hobbies.map(h => <li>{h}</li>)}
+        </ul>
+      </div>
+    )
+  }
+}
+```
+
+## Default Props
+--
+
+1. What are default values for props?
+    - Components can specify default values for missing props
+        - All we do is define an object called 'defaultProps'
+            - We put key/value pairs inside our defaultPropts
+    
+2. Why would we use defaultProps?
+    - Say someone doesn't leave a name prop.
+    - If we map through our Friend.js people will think its a bug or something similiar
+        - We can specify a deafultProp of "Anonymous" and now it will at least display something.
+            - this can be used many other ways, this is just one example
+
+3. 
