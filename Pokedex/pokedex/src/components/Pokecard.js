@@ -1,24 +1,26 @@
 import react, { Component } from 'react'
 import { render } from 'react-dom';
+import '../Pokecard.css'
+
+const POKE_API='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
 
 class Pokecard extends Component {
 
     render() {
-        console.log(this.props.data)
-        const everyPokemon = this.props.data
-        const pokeImages =  'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png';
+        let imgSrc= `${POKE_API}${this.props.data[0].id}.png`;
 
-      return (
-          <div>
-          <ul>
-          {everyPokemon.map(i => <li>{i.name}
-          <br />
-          <br />{i.type}
-          <br />{i.base_experience}
-          <br /></li>)}
-          </ul>
-          </div>
-      )
+
+
+
+        return (
+            <div className="Pokecard" >
+                <h1>{this.props.name}</h1>
+                <img src={imgSrc} />
+                <div>Type: {this.props.type}</div>
+                <div>EXP: {this.props.exp}</div>
+            </div>
+        )
     }
-  }
+}
+
 export default Pokecard;
