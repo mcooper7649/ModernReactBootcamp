@@ -762,3 +762,254 @@ console.log(`I'm sorry we're all out. We have ${remaining.length} other foods le
         -  ``import logo from "./logo.svg"``
         - ``<img src={logo} />``
         - If i wanted to apply a className to this image next I would use ``Dog-img`` as it lets us differientiate our component/classes
+
+## Pokedex Excercise
+--
+
+1. Intro to Pokedex Exercise
+    - We are going to create a Pokedex inside of our App Component (This will not have any direct logic in it)
+    - Pokedex
+        - It will display a list of pokemon as cards    
+            - You can style it how you like
+        - Each card will have a set of properties
+            - Name of Pokemon
+            - Image of Pokemon
+            - Type of Pokemon
+            - Experience of Pokemon
+
+
+2. Create PokeCard (in src for this project)
+    - Export Default Pokecard
+    - Import Pokecard to App.js
+
+3. On App.js 
+    - In between a ``<div>`` we need to ``<Pokecard />``
+    - We can manually pass a set of props from our provided list through the ``<Pokecard />`` tag.
+
+4. Now we can work on Pokecard
+    - create a div with the class "Pokecard"
+    - Next we will give the Pokecard structure
+        - h1 this.props.name
+        
+5. Lets add an image
+    - This is tricky because of a couple reasone
+        - We need to create a const Poke_API with a url ROOT
+        - then we need set a var named 'imgSrc' use embedded JSX interpolation with backticks and this.props.id to set the img.
+        - then we set the ``<img src{imgSrc} />``
+
+
+6. Lets add the type and exp as ``<div>`` tags next
+
+7. We can import a stylesheet next, typically we create a stylesheet the same name as our components
+    ``import './Pokecard.css'``
+
+## Adding the Pokedex Component
+--
+
+1. Create Pokedex.js and Pokedex.css
+    - export default Pokedex;
+
+2. Lets add the defaultProps for data next above render inside our compoent
+
+```
+static defaultProps {
+    pokemon: [
+  {id: 4, name: 'Charmander', type: 'fire', base_experience: 62},
+  {id: 7, name: 'Squirtle', type: 'water', base_experience: 63},
+  {id: 11, name: 'Metapod', type: 'bug', base_experience: 72},
+  {id: 12, name: 'Butterfree', type: 'flying', base_experience: 178},
+  {id: 25, name: 'Pikachu', type: 'electric', base_experience: 112},
+  {id: 39, name: 'Jigglypuff', type: 'normal', base_experience: 95},
+  {id: 94, name: 'Gengar', type: 'poison', base_experience: 225},
+  {id: 133, name: 'Eevee', type: 'normal', base_experience: 65}
+]
+}
+```
+3. lets ``Import Pokecard form './Pokecard'`` next
+    
+4. Now we need to map through our 'pokemon' and for each iteration we need to render a pokecard
+    - Make sure to use this.props when mapping so you can tap into them
+    - also make sure to create new props to passdown
+
+```
+                <div className="Pokedex-cards">
+					{this.props.pokemon.map((p) => (
+						<Pokecard id={p.id} name={p.name} type={p.type} exp={p.base_experience} />
+					))}
+				</div>
+```
+
+5. Yay now we meet basic requirements and cards are rendering.
+
+## Styling hthe Pokecard and Pokedex
+--
+
+1. This module is pure css, no logic changes
+    - Lets wrap our all our Pokecard in a new div with a className 'Pokedex-cards"
+    - Now we can edit that class in our pokedex.css
+
+2. Lets add display: flex as a .Pokedex-cards class
+    - Next lets add 300px width for each .Pokecard
+
+3. Back inside Pokedex.css, .Pokedex-cards class
+    - Lets add justify-content: space-evenly;
+    - then add flex-wrap: wrap
+
+4. Pokecard.css
+    - .Pokecard class
+        - padding 10px
+        - margin: 1rem
+        - box-shadow: 7px 10px 12px -5px rgba(0,0,0,0.56);
+        - text-align: center;
+        - background-color: #ffffff;
+        - border-radius: 3px; very small rounding of corners
+
+5. Lets set the background-color for the whole app
+    - recommended ot use the index.css for this
+        - body
+            - background-color: #eceff1;
+            - color: #4d4d4d:
+
+
+6. Lets add some classeses to our Pokecard components-  
+    - h1 
+        - Pokecard-title
+    - div (both divs)
+        - Pokecard-data
+
+7. Now inside of our Pokecard.css
+    - .Pokecard-data
+        - font-size: 80%
+        
+
+## Adding Fancier Images
+--
+
+1. We need to add some logic to our Pokecard.js
+    - We need to find our id
+    - set the POKE_API to this:
+    ``const POKE_API = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/'``
+    - take our id and pad it to 3 digits
+        - meaning if your id was 4, its now 004
+        - or if your id was 84 its now 084
+        - or if your id was 111 its still 111
+        - in our logic below you can see we add 00 to the id, then slice (from the right) 3 digits, so it it was 4, it turned into 004 then we sliced. Or if it was 55 then we have 0055 sliced = 055.
+``let padToThree = (number) => (number <= 999 ? `00${number}`.slice(-3) : number);``
+
+
+
+## Pokegame Component
+--
+
+1. Lets first create the Pokegame Component
+
+2. We first will take the defaultProps and move it over
+    - create hand1 as an array
+    - create hand2 be an array with ``[...this.props.pokemon]``
+
+3. Next we can import Pokegame on our App.js instead of Pokedex
+
+4. We are going to create some logic that says
+    - While hand1's length of array is less than hand2s length
+        - let a randomindex pull a random card for hand2 array
+        ``let randIdx = Math.floor(Math.random() * hand2.length);``
+        - next we create randPokemon and splice from hand2 the index and push it to hand1
+
+        - let exp1 = the reduced exp of hand1 pokemon 
+        ``let exp1 = hand1.reduce((exp, pokemon) => exp + pokemon.base_experience, 0);``
+        - same with exp2
+        - in our return, we want to pass our Pokedex
+            - is Components some props
+                - pokemon
+                    - hand1
+                - exp
+                    - exp1 logic
+                - inWinner
+                    - exp1 vs exp2 logic
+                
+        
+
+## Styling Pokegame
+--
+
+1. We want to add a terniary as our ``<p>`` className
+    - "Pokedex-winner"
+    - "Pokedex-loster"
+
+2. Now to clean up our code we can take our ternirary and remove it and instead create a variable named 'title'
+
+3. we can use if/else(this.propsisWiiner)
+```
+let title;
+		if (this.props.isWinner) {
+			title = <h1 className="Pokedex-winner">Winning Hand</h1>;
+		} else {
+			title = <h1 className="Pokedex-loser">Losing Hand</h1>;
+		}
+```
+
+4. The we just add {title} to our Pokedex
+```
+return (
+			<div className="Pokedex">
+				{title}
+				<h4>Total Experience: {this.props.exp}</h4>
+				<div className="Pokedex-cards">
+					{this.props.pokemon.map((p) => (
+						<Pokecard id={p.id} name={p.name} type={p.type} exp={p.base_experience} />
+					))}
+				</div>
+			</div>
+		);
+```
+
+5. Next we can modify the classes to have red and green for winner/loser
+    - Also text-align center for .Pokedex class0
+
+6. we can get rid of our defaultProps in our Pokedex now, we're no longer using them
+
+7. remove the h1 "Pokedex" lets replace with {title}
+
+8. Lets add a class to our div tag .Pokemon-image
+    - display: flex
+    - justify-content: center;
+    - align-items: center;
+    - height: 250px
+    - background-color: #eceff1;
+    - border-radius: 3px;
+    - margin-bottom: 1rem;
+
+9. Add a hover effect
+    - .Pokecard img:hover 
+        - tranform: scale(1.25);
+        - opacity: 0.7;
+        
+10. Lets slow the effect down
+    - .Pokecard img
+        transition: all ease 500
+            - this mean all properties, ease, 500 miliseconds
+
+11. Lets import our font on index.css
+``@import url('https://fonts.googleapis.com/css?family=Work+Sans');``
+```
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Work Sans';
+	|: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: #eceff1;
+	color: #4d4d4d;
+}
+```
+
+12. Lastly, our ".Pokecard-title"
+```
+.Pokecard-title {
+	margin-bottom: 1rem;
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+```
+
+
