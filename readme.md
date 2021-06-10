@@ -1013,3 +1013,48 @@ body {
 ```
 
 
+## React State
+--
+
+
+1. We currently have a react site that has props but the data isn't dynamic, nothing about them is changing.
+
+2. Goals
+    - Understand the concept of state in web applications
+    - Learn how to model state in React
+    - Use events to trigger state changes
+
+3. Lets first take a closer look at REACT developer tools
+    - We can open it inside the browser, rightclick inspect
+        - Components is the name of the REACT tool we need
+        - You can see it shows all the props and array information
+    - We must remember in the following module, state, we will see these values change and that can be very helpful while developing
+
+
+## State in General
+--
+
+1. What is state?
+    - In any sufficiently advanced web application, the user inferface ahs to be stateful.
+    - Some examples of state include
+        - logged in users can see a different screen than logged-out users
+        - clicking "edit profile" opens up a modal(pop-up) window
+        - sections of a website can expand or collapse, for instance clicking "read more:
+    The state of the client interface (frontend) is not always directly tied to state on the server.
+
+2. State Changes
+    - State is designed to constaly chagne in response to events.
+    - A great way to think about state is to think of gaems, for instance chess. At any point in time, the baord is in a complex staet.
+
+3. What Does State Track?
+    - UI logic the changing state of the interfacee e.g., there is a modal open right now because i'm editing my profile.
+    - Business logic the changing state of data e.g., in my inbox, messages are either read or unread, and this in turn affects how they display.
+
+4. Vanilla/jQuery State
+    - The way we kept track of state with jQuery was by  selecting DOM elements and seeing if they were displayed/hidden, or if they had certain styles or attributes.
+    - In other words, we were inferring the state of the application from the DOM itself.
+
+## Initializing State
+--
+
+1. 
