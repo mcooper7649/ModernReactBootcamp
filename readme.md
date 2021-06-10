@@ -1057,4 +1057,62 @@ body {
 ## Initializing State
 --
 
-1. 
+1. Core React Concept Review
+    - Components
+        - Building Block of React
+        - Combines JS logic and JSX presentation
+
+    - prop
+        - data passed to a component (or found via defaults)
+        - immutable; component cannot change its own props
+    - state
+        - internal data specific to a component
+        - data that changes over time
+
+2. What is React State?
+    - In React, state is an instance attribute on a component
+    - its always an object(POJO), since you'll want to keep track of several key/values.
+
+3. Initial State
+    - State should be initialized as soon as the component is created.
+        - So we set it in the constructor function
+example state
+        ```
+        class ClickCount extends Component {
+            constructor(props){
+                super(props);
+                this.state = {
+                    numClicks: 0
+                }
+            }
+        }
+        ```
+
+4. React Constructor Function
+    - If your component is stateless, you can omit the constructor function
+    - So this means if you want to a state, you cannot use a function component as they cannot have a constructor
+    - If you are building a component with state, you need a standard React constructor
+    - Construcotr takes one argument, props
+    - you msut call super(props) at start of constructor, which "registers" your class as a React Component
+    - Inside the instance methods, we can refer to this.state just like you did this.props
+
+classic react constructor
+```
+constructor(props){
+    super(props);
+    this.state{
+        key: value
+    }
+}
+```
+
+5. Alternate Syntax
+--
+
+1. There is another method to intialize state, it's not the standard, but utilizes babel.
+
+2. we can remove the constructor and super methods and just leave state without 'this'
+
+3. There are a few reasons why I don't recommend
+    - This is non-standard JS and only works by DEFAULT because we are using CRA
+    
