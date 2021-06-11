@@ -1234,3 +1234,19 @@ example
 * Tips
     - Update the number first when you click the button
     - Then we can focus on the conditional rendering after
+
+* see excercise-state-clicker folder for code
+
+## Excercise Step Involved  
+- mkdir
+- create-react-app app-name
+- npm i
+- npm start
+- clean up directory files
+- Clean up App.js
+- Convert App into class //make sure not to add () after Component
+- add constructor(props)
+- add super(props)
+- this.state default values
+- In the h1 {this.state.num}
+- Create a randomizer button
