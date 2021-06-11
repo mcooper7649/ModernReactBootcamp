@@ -1116,3 +1116,58 @@ constructor(props){
 3. There are a few reasons why I don't recommend
     - This is non-standard JS and only works by DEFAULT because we are using CRA
     
+## WTF is SUPER() vs SUPER(props)
+--
+
+1. For a rule of thumb, if you just want to skip this video, just put super(props) if you are building a component with state
+
+2. First we want to look at our whole component code.
+    - ``class Game extends Component {}``
+        - If we don't put extends Component, which is short for React.component, we don't get the React functionality
+    - If we don't put the super constructor we get console errors
+    - If we pass the super but we don't pass props inside the super
+        - the Constructor will not have access to the props IN THE RENDER
+    - if we don't put super but pass this.state, we will get console errors TOO
+
+
+## Setting State Correctly
+--
+
+1. Creating the state was really easy right?
+example
+```
+    this.state = {
+        score:  99
+    }
+```
+
+2. Changing the state is where can run into issues
+``this.state.score = 0;`` // this is NOT what your supposed to do
+
+3. Never directly CHANGE the state
+
+4. setState() is the built in React method of changing a components state.
+    - Can call in any instance method except the constructor
+    - Take an object describing the state changes
+    - Patches state object - keys that you didn't specify don't change
+
+5. DO NOT setState in the constructor (we'll learn more in lifecycle methods)
+    - Just iniitialize in the constructor
+
+6. You ALSO shouldn't setState inside of your RENDER
+
+7. ASYNCHRONOUS!!!!
+    - The component will eventually update.
+    - React controls when the staet will actually chage, for the performance reasons.
+    - Components re-render when tehir state changes.
+
+8. With setState there are more than one syntax
+    - You can pass a function as the first argument
+    - Or an Object
+    - BOTH are asynchronous
+    - We can pass a callBack as our second argument, to run after the state has changed
+    
+9. Think of setState as a request rather an imemdiate command to update the component. 
+    - This is why we don't immediately interact with state values, because react under the hood is managing all these changes
+
+10. Everytime the state changes the RENDER is called
