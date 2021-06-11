@@ -1171,3 +1171,66 @@ example
     - This is why we don't immediately interact with state values, because react under the hood is managing all these changes
 
 10. Everytime the state changes the RENDER is called
+
+
+## React Events
+--
+
+1. State most commonly changes in direct response to some event
+
+2. So for our example we will have a class called BrokenClick
+    - we will pass our constructor/super like normal with props
+    - but we will declare state with clicked: false
+    - in our return we will have an h1 that uses ternirary
+    ``<h1>{this.state.clicked ? Clicked!!!' : 'Not Clicked'}</h1>``
+    - We will also have a button with onClick={this.handleClick}
+    - we will create the handleClick but pass the event
+        ```
+        handleClick(e){
+            this.setState({ clicked:true})
+        }
+        ```
+3. We will still get an error unless we fix this error
+    - "this is undefined"
+    -  Who is calling handleClick for us?
+        - React is, on click
+    - What is it calling on?
+        - it's not actually calling it on our specific instance
+        - The method is called out of context
+    - What do we need to do?
+        - BIND it!!!
+        - .bind()
+
+4. Inside our constructor we can put this 
+``this.handleClick = this.handleClick.bind(this);``
+- This sets the context of handleClick
+- Please note you can use other methods to bind
+    - Class Properties
+    - Bind in Render
+    - Arrow Function inside of render
+
+5. YAY now our button works and context has been set
+
+## Alternate Syntax 
+--
+
+1. If you are using the alternate systax for class like we mentioned earlier
+    ``handleClick = (e) => {
+        this.setState({clicked: true })
+    }``
+    - This example above is the handle click function we want
+        - It will also bind it to the instance automatically
+        -  We must remember AGAIN this is a CRA BABEL feature
+
+## Exercise: State Clicker
+--
+
+1. Create a very simple component
+2. It has an h1 at the top that displays "Number is 1" by default
+3. We have a button below it
+4. When we click the button the number is randomly changed between 1-10
+5. If we get the number 7 our button disappears and text appears saying "You Win"
+
+* Tips
+    - Update the number first when you click the button
+    - Then we can focus on the conditional rendering after
