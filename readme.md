@@ -1250,3 +1250,294 @@ example
 - this.state default values
 - In the h1 {this.state.num}
 - Create a randomizer button
+- Add a default state key of winner: false
+- add a handleclick(e)
+    - inside here we are going to take a random number between 1-10 and round it
+    - if the number lands on 7 we will setState of winner to true:
+    - we will always setState of the num key/value
+- Create css classes named visible and hidden
+    - set css to visibility properties
+- use this.state.winner ? ternirary to apply our classes
+
+
+## State vs Props
+--
+
+1. State and Props are the most important concepts in React (after knowing what a component is).
+
+2. Both State and Props are POJO, only state is mutable
+    - State
+        - mutable
+        - stores changing the component data
+    - props
+        - not mutable
+        - stores component configuration
+
+3. What is State as Props?
+    - A common pattern we will see over and over again is a stateful("smart") parent compoent passing down its state values as props to stateless("dumb") child components
+
+example of state as props
+```
+class CounterParent extends Component{
+    constructor(props){
+        super(props);
+        this.state = {count: 5}
+    }
+    render(){
+        return(
+            <div>
+                <CounterChild count={this.state.count} />
+            </div>
+        )
+    }
+}
+```
+
+
+## Introduction to the Dice Exercise
+--
+
+Follow the steps needed in the guide below to configure our Dice Challenge
+
+react-bootcamp-materials/07-dice-exercise/dice-exercise-handout/index.html
+
+1. Basically we want to have 2 dice (default value: two ones)
+2. A button that rolls the dice when we click
+3. Animation on the dice during the roll
+4. Text on the button during the roll and changes colors
+5. Button is disabled during the roll
+
+
+
+## Steps to Complete Preparation
+--
+
+1. Create-React-App exercice-dice
+2. npm i
+3. npm start
+4. Clean up directory structure
+5. Clean up code
+
+## Actual Code
+--
+
+Step 1: Component Structure
+Make two components:
+
+RollDice - a parent component (rendered by App) that renders the dice and a button to roll.
+Die - an individual die that takes props and displays the correct face of the die based on props.
+
+Step 2: Connect FontAwesome CDN
+    - ``<script src="https://kit.fontawesome.com/8cc1b75eb3.js" crossorigin="anonymous"></script>``
+
+Step 3: Create Our components
+    - RollDice
+    - Die
+
+Step 4: 
+    - Add in our Font Awesome Icon
+        - Using String interpolation lets impport the defaultProps of dice
+        ``                <i className={`fas fa-dice-${this.props.dice}`}></i>``
+
+Step 5: 
+    - Lets Create Die.css to stylize our Dice
+    - Remember to Import it to Die.js
+    - add a custom class called "Die"
+    - Edit this class, on Die.css
+    ```
+    .Die {
+    font-size: 10em;
+    padding: 0.25em;
+    color: rgb(29, 170, 252);
+    }
+    ```
+
+Step 6:
+    - Inside our RollDice Component
+    - Create our constructor
+    - add the super
+    - configure the state
+        - add dice1 and 2 starting values
+    - Export default RollDice
+    
+Step 7:
+    - Lets use defaultProps to have an array of numbers
+    - Lets add in a button
+        - lets add an onClick
+    - Lets create handlelick event
+        - When the button is clicke we create two variables
+            - rand1 and rand2 are generated from our default props
+            - the state is set for dice1 and dice2 
+                - rand1 and rand2 are the new values
+                - whenever the state is changed the render is ran again, thus showing the dice new values
+
+Step 8:
+    Styling RollDice
+        - import RollDice.css
+```
+.RollDice {
+    display: flex;
+    flex-flow: column nowrap;
+    min-height: 100vh;
+}
+
+.RollDice button {
+    align-self: center;
+    width: 15em;
+    padding: 1.5em;
+    border-radius: 10px;
+    color: white;
+    background-color: black;
+    margin-top: 3em;
+}
+
+.RollDice button:hover {
+    background-color: rgb(8, 100, 219);
+    cursor: pointer;
+}
+
+.RollDice-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+```
+
+Step 9: 
+
+1. Handling Animations
+    - First we want to add a ternirary for our Button text
+```
+<button onClick={this.handleClick}>
+      {this.state.rolling ? "Rolling..." : "Roll Dice!"}
+</button>
+```
+
+2. Inside our handleclick, we want to use a setTimeout function
+    - it sets the state back to false
+        - after 1000ms or 1sec
+
+3. Disabled Attribute
+    - We can use a new attribute called "Disabled"
+        ``<button onClick={this.handleClick} disabled={this.state.rolling}>``
+
+4. Animations
+    - We added keyframes wobble to add the animate affect
+    - We do @keyframes
+    - assign a name (wobble) because it makes sense
+    - then you can transform the frames of the animation by percentage
+    - and adjust using the tranform properties
+    - this doesn't work until we add it
+
+5. Adding our Animation 
+    - Inside the Die.css
+        - inside the Die class
+            - we are going to add two animation key/values
+                - animation-name: wobble;
+                - animation-duration 1s;
+
+6. Great out Animatio works but only on reload
+    - We need to create a class and apply it via state
+    - We already have a state that we can tap into, rolling
+    
+7. Inside die.css 
+    - we can create a class .shaking
+        - move our animation css properties there
+    
+8. Lastly, we need to add a class to our ``<i>`` tag, with the interpolation from earlier, but we need to make it be a ternirary:
+    - Basically the ternirary says, if props.rolling = true, put shaking class on
+``<i className={`Die fas fa-dice-${this.props.dice} ${this.props.rolling? 'shaking' : ''}`}></i>``
+
+
+
+
+## React State Values
+--
+
+1. Goals
+    - Learn how to update state based off of existing state
+
+2. Say we have an app called Scorekeeper
+    - In this app we have a score: default value 0
+    - we also have 2 buttons.
+        - single kill (click) score goes up by 1
+        - triple kill (click) score goes up by 3
+    - both are binded
+    
+
+3. Inside our both functions look like below (THIS IS BAD CODE)
+```
+singleKill(){
+    this.setState({score: this.state.score + 1});
+}
+
+tripleKill(){
+    this.setState({score: this.state.score + 1});
+    this.setState({score: this.state.score + 1});
+    this.setState({score: this.state.score + 1});
+}
+```
+
+
+4. The code above is bad, why?
+    - It has to do with how setState works
+    - its asyncronous
+        - we can't assume previous calls are finished before setting another
+        - React will also sometimes batch calls to setState together into one for perormance reasons
+        
+4. If a setState depends on currentState the safest thing is to use the alternate  "callback form".
+    - setState Callback form example
+    ``this.setState(callback)``
+    - The callback should return an object representing the new state
+
+GoodCode
+```
+tripleKill(){
+    this.setState(st => {
+        return {score: st.score + 1} // Current State Score + 1
+    })
+    this.setState(st => {
+        return {score: st.score + 1} // Current State Score + 1
+    })
+    this.setState(st => {
+        return {score: st.score + 1} // Current State Score + 1
+    })
+}
+```
+
+5. The example above won't be batched anymore by React and asyncronous will flow.
+
+6. Abstracting State Updates
+    - The fact that you can pass a funciton to ``this.setState`` lends itself nicely to a more advanced pattern called functional setState
+
+    - Basically you can describe your state updates abstractly as seperate function. But why would you do this?
+
+    - example of functional setState
+    ```
+    //elsewhere in the code
+    function incrementcounter(prevState){
+        return { count: prevState.count + 1};
+    }
+
+    // somewhere in the component
+    this.setState(incrementCounter);
+    ```
+    - Because testing your state changes is as simple as testing a plain function
+
+    ``expect(incrementCounter({ count: 0})).toEqual({ count: 1});``
+
+    - This pattern also comes up all the time in Redux!!!
+
+
+Cleaned up code doing the same thing
+```
+incrementScore(curState){
+    return { score: curState.score + 1}
+}
+
+tripleKill(){
+    this.setState(this.incrementScore);
+    this.setState(this.incrementScore);
+    this.setState(this.incrementScore);
+}
+```
