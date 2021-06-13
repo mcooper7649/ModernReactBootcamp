@@ -1590,3 +1590,145 @@ completeTodo(id){
     - The safest way to update state is to make a copy of it, and then call this.setState with the new copy.
     - This pattern is a good habit to get into for React apps and required for using Redux
 
+## Designing State: Minimizing State
+--
+
+1. Designing State
+    - Designing the state of a React application(or any modern web app) is a challenging skill! It takes practice and time!
+    - However, there are some easy best-practices that we can talk about in this section to give you a jumpstart
+    
+2. Minimizing Your State
+    - In React, you want to try to put as little data in teh state as possible
+    - A litmus test you can ask yourself is
+        - Does x change? x should not be part of state. It hsould be a prop.
+        - is x already captured by some other value y in state or props? derive it from there instead.
+    
+
+## Bad Example of State Design
+--
+1. Let's pretend we're modeling a Person
+    this.state = {
+        firstName: 'Matt',
+        lastName: 'Lane',
+        birthday: '1955-01-08T07:37:59:711Z',
+        age: 64,
+        mood: 'irate'
+    }
+2. Does Matt's first name or last name ever change? Not often I hope..
+    - no, should be a prop
+3. Does Matt's birthday ever change? How is that even possible!
+    - no, should be aprop
+4. Matt's age does change, howeever if we had this.props.birthday we coudl easily defive it from that.
+5. Therefore, the only property here that is truly stateful is arguably mood (although Matt might dispute this)
+
+
+## Fixed Example of State Design
+--
+
+1. Here is what the design should look like
+    - Please keep in mind we are trying to keep as little amount of data in state as possible
+
+
+good example
+```
+console.log(this.props);
+{
+    firstName: 'Matt',
+    lastName: 'Lane',
+    birthday: '1955-01-08T07:37:59:711Z',
+    age: 64
+}
+
+console.log(this.state);
+{
+    mood: 'insane'
+}
+```
+
+## State Should Live On the Parent
+--
+
+1. As previously mentioned, we want to support the "downward data flow" philosophy of React.
+
+2. In general, it makes more sense for a parent component to manage state and have a bunch of dumb stateless child dipsaly components
+
+3. This makes debugging easier, because the state is centralized. it's easier to predict where to find state:
+    - Is the current component stateless? Find out what is rendering it. There's the state.
+
+## State Should Live On the Parent
+
+Todo Example:
+```
+class Todolist extends Componeent {
+    constructor(props){
+        super(props);
+        this.state = {
+            todos: [
+                { task: 'do the dishes', done: false, id: 1 },
+                { task: 'vaccume thde flue, done: ture: id: 2}
+            ]
+        };
+    }
+    render(){
+        return (
+            <ul>
+            {this.state.todos.map(t => <Todo {...t} />)}
+            </ul>
+        );
+    }
+}
+```
+
+1. If we look at our example, the TodoList parent maps through all the 'todos' and passes each prop onto the ``<Todo {...t} />`` component, and creates a list item for each
+
+2. Now this doesn't mean that these  child components won't have a state
+
+
+## State Design Exercise: Lottery
+--
+
+1. Lets Design an App!
+    - In App.js
+        - ``<Lottery />``
+    - Should show 6 balls
+    - Value 1-40 gnerated when button clicked
+
+2. Should be Reusable, Flexible
+    - We want a main Lotto
+        - 6 balls
+        - 1-40
+    - We want a 'Mini Daily'
+        - 4 balls 
+        - 1-10
+
+3. Should be able to control tile, num alls to show, and max value
+
+exmample
+```
+<div>
+<Lottery />
+<Lottery title="Mini Daily" numBalls={4} maxNum={10}>
+```
+
+4. Design
+    - What components will we need?
+    - What props will they need?
+    - What state will we need?
+
+5. Lottery Component
+    - Props
+        - Title: title of the lottery
+        - numBalls: num of balls to display
+        - maxNum: max value of ball
+    - State
+        - nums: array of [num,num,num, ...] for balls
+    - Events
+        - onClick regenerate nums in state
+
+6. LotteryBall Component
+    - Props
+        - num: value on this ball
+    - State
+        - none
+    - Events 
+        - none

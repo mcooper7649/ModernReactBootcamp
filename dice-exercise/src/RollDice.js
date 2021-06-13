@@ -46,7 +46,7 @@ render (){
     <div className="RollDice">
         <div className="RollDice-container">
             <Die dice={this.state.dice1} dice1={this.props.dice1} rolling={this.state.rolling} />
-            <Die dice={this.state.dice2} dice2={this.props.dice2} rolling={this.state.rolling} />
+            <Die dice={this.state.dice2} dice2={this.props.dice2} rolling={this.state.rol} />
             </div>
             <button onClick={this.handleClick} disabled={this.state.rolling}>
                 {this.state.rolling ? "Rolling..." : "Roll Dice!"}
