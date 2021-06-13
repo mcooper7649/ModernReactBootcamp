@@ -1541,3 +1541,52 @@ tripleKill(){
     this.setState(this.incrementScore);
 }
 ```
+
+## Muteable Data Structures in React
+--
+
+1. Until now, we've been setting state to primitives: mainly numbers and strings
+
+2. But component state also commonly includes objects, arrays, and arrays of objects.
+
+3. Which objects arrays and arrays of objects we don't want change the data we want to make a copy of it. We can use anyt 'pure function' to do this
+
+
+Bad Example
+```
+completeTodo(id){
+    const theTodo = this.state.todos.find(t => t.id === id);
+    theTodo.done = true; //Noooo
+
+    this.setState({
+        todos: this.state.todos // Bad
+    })
+}
+
+
+
+Good Example using spread operator
+```
+completeTodo(id){
+    //Array.prototype.map returns a new array
+    const newTodos = this. state.todos.map(todo => {
+        if (todo.id == id){
+            // make a copy of the todo object with done -> true
+            return {...todo, done: true};
+        }
+        return todo; //old todos can pass thr
+    });
+    this.setState([
+        todos: newTodos // setState to the new array
+    ]);
+}
+
+4. Immutable State Updates
+    - Pure Functions such as .map, filter, and reducce are your friends. So is the ...spread operator
+    - there is a slight efficiency cost due to the O(N) space/time required to make a copy, but its almost worth it to ensure that yoru app doesn't have extremely difficult buts due to mischivious side effects.
+
+5. Immutable State Summary 
+    - While it sounds like an oxymoron, immutable state jnust means that there is an old state object and a new state object that are both snapshots in time.
+    - The safest way to update state is to make a copy of it, and then call this.setState with the new copy.
+    - This pattern is a good habit to get into for React apps and required for using Redux
+
