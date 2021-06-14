@@ -29,7 +29,7 @@ class Lottery extends Component {
         this.setState({
             rolling: false
         })
-    }, 1000);
+    }, 100);
   }
   handleClick() {
       this.setState({

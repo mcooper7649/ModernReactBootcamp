@@ -5,7 +5,7 @@
   margin: 1em auto auto;
   border-radius: 10px;
   width: 40em;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   background-color: gold;
 }
 
@@ -15,5 +15,6 @@
   font-size: 120%;
   border-radius: 10px;
   margin-top: 1em;
+  padding: 3px 20px;
 }
 
