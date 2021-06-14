@@ -8,7 +8,7 @@ class App extends Component {
       <div className="App">
         <h1 className="main-h1">
         <i class="fas fa-gem"></i>
-         Lucky Number Generator 
+         Lucky Lotto Number Generator 
         <i class="fas fa-gem"></i>
         </h1>
         <Lottery />
