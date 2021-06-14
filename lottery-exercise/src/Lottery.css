@@ -5,12 +5,15 @@
   margin: 1em auto auto;
   border-radius: 10px;
   width: 40em;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: gold;
 }
 
 .Lottery button {
-  background-color: darkblue;
+  background-color: tomato;
   color: white;
   font-size: 120%;
   border-radius: 10px;
   margin-top: 1em;
 }
+
