@@ -29,7 +29,7 @@ class Lottery extends Component {
         <h1>{this.props.title}</h1>
         <div>
           {this.state.nums.map(n => (
-            <Ball key={Math.random(n)} num={n} />
+            <Ball num={n} />
           ))}
         </div>
         <button onClick={this.handleClick}>Generate</button>

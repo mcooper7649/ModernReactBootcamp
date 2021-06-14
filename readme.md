@@ -1701,7 +1701,7 @@ class Todolist extends Componeent {
         - 4 balls 
         - 1-10
 
-3. Should be able to control tile, num alls to show, and max value
+3. Should be able to control title, num alls to show, and max value
 
 exmample
 ```
@@ -1732,3 +1732,52 @@ exmample
         - none
     - Events 
         - none
+
+
+## Getting Started
+--
+
+1. First thing we want to do is create our Ball component
+    - add to src folder "Ball.js"
+    - Add "Ball.css" too
+    - export default and import ball to app.js
+    - Add ``<Ball num={17}/>`` this has a prop we can tap into 
+
+2. in our Ball.js
+    - in our return ``return <div className="Ball">{this.props.num}</div>``
+
+3. Lets create out Lottery.js file next in the src folder
+    - do the export default lottery
+    - set default props with lotto requirements as the values
+        - title:
+        - maxBalls:
+        - maxNum:
+
+4. Create thee constructor
+    - super(props);
+    - set nums key as an array that is the length of the maxBalls Prop
+
+constructor
+```
+    constructor(){
+        super(props);
+         this.state = {nums: Array.from({length: this.props.maxBalls})};
+    }
+```
+
+5. Inside our return on Lottery.js
+    - Section as the main wrapping tag
+    - h1 will be this.props.title
+    - static div with "balls go here"
+    - a button with onClick event that taps into this.handleclick
+
+6. Create handlelick()
+    - inside our component after our constructor
+    - this.generate() in our function block
+
+7. Create generate() before our handleClick function
+    - this will be the main logic behind the randomization
+    - we will first use this.setState()
+        - we will use curState => with a CALLBACK
+        - nums: property is set to curState.nums.map
+            - we then floor the iteratorand randomize using our maxNum props + 1
