@@ -6,11 +6,15 @@ class App extends Component {
     render(){
     return(
       <div className="App">
+        <i className="main fas fa-gem"></i>
+        <i className="main fas fa-gem"></i>
+        <i className="main fas fa-gem"></i>
         <h1 className="main-h1">
-        <i class="fas fa-gem"></i>
-         Lucky Lotto Number Generator 
-        <i class="fas fa-gem"></i>
+         Lucky Lotto Number Generator
         </h1>
+        <i className="main fas fa-gem"></i>
+        <i className="main fas fa-gem"></i>
+        <i className="main fas fa-gem"></i>
         <Lottery />
         <Lottery 
         title="Mini Daily" maxNum={10} numBalls={4} 
