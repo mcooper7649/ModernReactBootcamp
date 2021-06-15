@@ -1,6 +1,7 @@
 import React,{ Component } from 'react'
 import Coin from './Coin'
 import Button from 'react-bootstrap/Button';
+import './FlipCoin.css';
  
 class FlipCoin extends Component{
   static defaultProps = {
@@ -23,7 +24,9 @@ class FlipCoin extends Component{
       // Track total number of flips
       currFace : null,
       totalFlips:0,
-      heads: 0
+      heads: 0,
+      flipping: false,
+      hidden: false
     }
      
     // Binding context of this keyword
@@ -47,28 +50,46 @@ class FlipCoin extends Component{
       return {
         currFace:newFace,
         totalFlips:curState.totalFlips + 1,
-        heads:heads
+        heads:heads,
+        flipping: true,
+        hidden: true
       }
     })
+
+    let audio = new Audio("./cointoss.mp3")
+    const start = () => {
+        audio.play()
+      }
+      start();
+
+    setTimeout(() => {
+      this.setState({
+          flipping: false
+      }) 
+   }, 500);
   }
  
   handleClick(){
+
     this.flipCoin()
   }
   render(){
-    const {currFace, totalFlips, heads} = this.state
+    const {currFace, totalFlips, heads, flipping, defaultFace } = this.state
     return(
       <div>
-        <h2>Let's flip a coin</h2>
-         
+        <h2 className="coin-title">Let's flip a coin</h2>
+         <img className={this.state.hidden ? "hidden" : "Coin"} src="https://www.moneymetals.com/images/products/American-Silver-Eagle.jpg" />
         {/* If current face exist then show current face */}
-        {currFace && <Coin info={currFace} />}
+        {currFace && <Coin info={currFace} flipping={flipping} />}
          
         {/* Button to flip the coin  */}
-        <Button onClick={this.handleClick}>Flip Me!</Button>
+        <Button size="lg" variant="danger" id="custom-btn" onClick={this.handleClick} disabled={this.state.flipping} >
+        {this.state.flipping ? "Flipping Coin..." : "Flip Me!"}
+        </Button>
+        
          
          
-<p>
+        <p className="coin-p">
           Out of {totalFlips} flips, there have been {heads} heads
           and {totalFlips - heads} tails
         </p>

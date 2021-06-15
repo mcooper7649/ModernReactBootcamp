@@ -1,10 +1,66 @@
 .Coin {
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 3px 3px 10px black;
+    border: 0px;
     background-color: white;
-    border: 1px solid black;
-    margin: 5%, 10%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    /* TRANSITION HERE!! */
+    -webkit-transition: transform 1s ease;
+    -moz-transition: transform 1s ease;
+    -ms-transition: transform 1s ease;
+    -o-transition: transform 1s ease;
+    transition: transform 1s ease;
+    /* END OF TRANSITION */
+    
 }
 
-.Coin-img {
-    width:'400px';
-    height:'400px' 
+.Coin img {
+
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: auto; 
+}
+
+.Coin:hover {
+      transform: translateX( -1px ) rotateY( 180deg ); /* ALSO EXTRA TRANSFORM PROPERTIES ADDED FOR COMPATIBILITY*/
+      -ms-transform: translateX( -1px ) rotateY(180deg); /* IE 9 */
+      -webkit-transform: translateX( -1px ) rotateY(180deg); /* Chrome, Safari, Opera */
+  }
+
+.flip-coin{
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 3px 3px 10px black;
+    border: 0px;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    /* TRANSITION HERE!! */
+    -webkit-transition: transform 1s ease;
+    -moz-transition: transform 1s ease;
+    -ms-transition: transform 1s ease;
+    -o-transition: transform 1s ease;
+    transition: transform 1s ease;
+    /* END OF TRANSITION */
+    transform: translateX( -1px ) rotateY( 180deg ); /* ALSO EXTRA TRANSFORM PROPERTIES ADDED FOR COMPATIBILITY*/
+      -ms-transform: translateX( -1px ) rotateY(180deg); /* IE 9 */
+      -webkit-transform: translateX( -1px ) rotateY(180deg); /* Chrome, Safari, Opera */
+}
+
+
+.flip-coin img {
+
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: auto; 
 }
