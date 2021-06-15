@@ -1781,3 +1781,30 @@ constructor
         - we will use curState => with a CALLBACK
         - nums: property is set to curState.nums.map
             - we then floor the iteratorand randomize using our maxNum props + 1
+
+## Ok Lets make it your own
+---
+
+1. Things I customized
+    - I added new css designs with animations
+    - I added audio on click 
+    - I added a setTimeout for the audio and animations
+    - Mobile Optimized
+    - Add React-Helmet for Meta-Tags
+
+
+## State Exercise | Coin Flipper
+--
+
+
+1. Part 1: Coin Flip
+    - Creat a coin flipping counter
+    - The user should be able to click on a button to flip a coin. Every timt ehe suer clicks, the coin gets flipped again. The app should also keep track of how many times heads and tails have shown up.
+    - Before building anything, think about the structure of your React App. Don't build this aplication with a single component: think how to break your app up into at least two seperate components (excluding the app component)
+    - If you'd like, get creative and coem up with yoru own coin faces! Heads: "https://tinyurl.com/react-coin-heads.jpeg" Tails: "https://tinyurl.com/react-coin-tails.jpg"
+        * Hints
+            - One component will be dreadfully simple, just displaying the coin
+            - One will have all the logic
+            - Use downward data flow
+
+2. Part 2: 
