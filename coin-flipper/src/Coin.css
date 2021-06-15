@@ -1,0 +1,10 @@
+.Coin {
+    background-color: white;
+    border: 1px solid black;
+    margin: 5%, 10%;
+}
+
+.Coin-img {
+    width:'400px';
+    height:'400px' 
+}

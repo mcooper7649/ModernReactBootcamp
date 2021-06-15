@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Helmet from 'react-helmet';
-import CoinFlip from './CoinFlip';
+import Flipcoin from './FlipCoin';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   render(){
@@ -16,10 +17,16 @@ class App extends Component {
           <meta name="author" content="Michael Cooper" />
           <meta name="publish_date" property="og:publish_date" content="2021-06-15T00:00:00-0600"></meta>
           <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&display=swap" rel="stylesheet" /> 
+          <link
+                rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+                integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+                crossorigin="anonymous"
+          />
           <script src="https://kit.fontawesome.com/8cc1b75eb3.js" crossorigin="anonymous"></script>
           <title>Lottery App</title>
         </Helmet>
-        <CoinFlip />
+        <Flipcoin />
     </div>
   );
 }

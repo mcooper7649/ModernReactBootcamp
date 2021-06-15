@@ -1,19 +1,17 @@
-import { Component } from "react";
 
-
-class Coin extends Component {
-     
-    
-    render (){
-            return (
-                <div className="Coin">
-                <h1>{this.props.title}</h1>
-                <img src={this.props.defaultImage}></img>
-                </div>
-                
-                
-            )
-        }
-    }
-
-    export default Coin;
+import React,{ Component } from 'react'
+import './Coin.css';
+class Coin extends Component{
+  render(){
+    return(
+      <div class='Coin'>
+        <img
+          className="Coin-img"
+          src={this.props.info.imgSrc}
+        />
+      </div>
+    )
+  }
+}
+ 
+export default Coin
