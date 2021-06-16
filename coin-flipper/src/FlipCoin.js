@@ -1,18 +1,19 @@
-import React,{ Component } from 'react'
+import React,{  Component } from 'react'
 import Coin from './Coin'
-import Button from 'react-bootstrap/Button';
+import { Button, Col, Row, Container }  from 'react-bootstrap';
 import './FlipCoin.css';
+import Footer from './Footer';
  
 class FlipCoin extends Component{
   static defaultProps = {
-    coins : [
+//     coins : [
      
-      // Sides of the coin
-      {side:'head', imgSrc:
-'https://www.moneymetals.com/images/products/American-Silver-Eagle.jpg'},
-      {side:'tail', imgSrc:
-'https://www.moneymetals.com/images/products/silver-eagle-coin-reverse.jpg'}
-    ]
+//       // Sides of the coin
+//       {side:'head', imgSrc:
+// 'https://www.moneymetals.com/images/products/American-Silver-Eagle.jpg'},
+//       {side:'tail', imgSrc:
+// 'https://www.moneymetals.com/images/products/silver-eagle-coin-reverse.jpg'}
+//     ]
   }
  
   constructor(props){
@@ -26,11 +27,20 @@ class FlipCoin extends Component{
       totalFlips:0,
       heads: 0,
       flipping: false,
-      hidden: false
+      hidden: false,
+      coins: [
+     
+        // Sides of the coin
+        {side:'head', imgSrc:
+        'https://www.moneymetals.com/images/products/American-Silver-Eagle.jpg'},
+        {side:'tail', imgSrc:
+        'https://www.moneymetals.com/images/products/silver-eagle-coin-reverse.jpg'}
+      ]
     }
      
     // Binding context of this keyword
     this.handleClick = this.handleClick.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
  
    // Function takes array of different faces of a coin
@@ -43,7 +53,7 @@ class FlipCoin extends Component{
   // Function responsible to update the states
   // according to users intractions
   flipCoin(){
-    const newFace = this.choice(this.props.coins)
+    const newFace = this.choice(this.state.coins)
     this.setState(curState => {
       const heads = curState.heads +
       (newFace.side === 'head' ? 1 : 0)
@@ -73,10 +83,60 @@ class FlipCoin extends Component{
 
     this.flipCoin()
   }
+
+  handleChange(e){
+    console.log(e.target.value)
+    if (e.target.value === "Buffalo"){
+      this.setState(curState => ({  
+        coins: [
+     
+          // Sides of the coin
+          {side:'head', imgSrc:
+          'https://www.moneymetals.com/images/products/1oz-silvertowne-obverse-silver-buffalo.jpg'},
+          {side:'tail', imgSrc:
+          'https://2ybaes-0497s6r6rnkm.cloudmaestro.com/V-u7Se6dz/wp-content/uploads/2017/07/a2017-1-oz-SilverTowne-Buffalo-Silver-Round-BACK.jpg.pagespeed.ic.2uAc8TF7co.webp'}
+        ]
+      }));
+    }else if(e.target.value === "Trump"){
+      this.setState(curState => ({  
+        coins: [
+     
+          // Sides of the coin
+          {side:'head', imgSrc:
+          'https://www.moneymetals.com/images/products/1oz-trump-silver-rounds-obverse.jpg'},
+          {side:'tail', imgSrc:
+          'https://www.moneymetals.com/images/products/1oz-trump-silver-rounds-reverse.jpg'}
+        ]
+      }));
+  }else if(e.target.value === "Trump-Gold"){
+    this.setState(curState => ({  
+      coins: [
+   
+        // Sides of the coin
+        {side:'head', imgSrc:
+        'https://i5.walmartimages.com/asr/dc138d7c-b976-40e1-9de1-ff762b46c6be.6134354d0148619c4e95bc5d0be297c2.jpeg?odnWidth=1000&odnHeight=1000&odnBg=ffffff'},
+        {side:'tail', imgSrc:
+        'https://images.ontheedgebrands.com/cdn-cgi/image/f=auto,quality=60/images/C35-BK4748.jpg'}
+      ]
+    }));
+}else if(e.target.value === "Original"){
+  this.setState(curState => ({  
+    coins: [
+     
+      // Sides of the coin
+      {side:'head', imgSrc:
+      'https://www.moneymetals.com/images/products/American-Silver-Eagle.jpg'},
+      {side:'tail', imgSrc:
+      'https://www.moneymetals.com/images/products/silver-eagle-coin-reverse.jpg'}
+    ]
+  }));
+  }
+}
+
   render(){
     const {currFace, totalFlips, heads, flipping, defaultFace } = this.state
     return(
-      <div>
+      <div className="flipcoin">
         <h2 className="coin-title">Let's flip a coin</h2>
          <img className={this.state.hidden ? "hidden" : "Coin"} src="https://www.moneymetals.com/images/products/American-Silver-Eagle.jpg" />
         {/* If current face exist then show current face */}
@@ -84,17 +144,28 @@ class FlipCoin extends Component{
          
         {/* Button to flip the coin  */}
         <Button size="lg" variant="danger" id="custom-btn" onClick={this.handleClick} disabled={this.state.flipping} >
-        {this.state.flipping ? "Flipping Coin..." : "Flip Me!"}
+        {this.state.flipping ? "Flipping Coin..." : "Press to Flip Coin"}
         </Button>
-        
-         
-         
-        <p className="coin-p">
-          Out of {totalFlips} flips, there have been {heads} heads
-          and {totalFlips - heads} tails
-        </p>
+        <br></br>
+        <Button className="coinface-btn" onClick={this.handleChange} value="Buffalo">Buffalo Silver Oz</Button>
+        <Button className="coinface-btn" onClick={this.handleChange} value="Trump">Trump Silver Oz</Button>
+        <Button className="coinface-btn" onClick={this.handleChange} value="Trump-Gold">Trump Gold Oz</Button>
+        <Button className="coinface-btn" onClick={this.handleChange} value="Original">Original</Button>
+
+        <Container className="my-grid">
+          <Row>
+            <Col>Total Flips</Col>
+            <Col>Total Heads</Col>
+            <Col>Total Tails</Col>
+          </Row>
+          <Row>
+            <Col>{totalFlips}</Col>
+            <Col>{heads}</Col>
+            <Col>{totalFlips - heads}</Col>
+          </Row>
+        </Container>
  
- 
+        <Footer className="footer"/>
       </div>
     )
   }
