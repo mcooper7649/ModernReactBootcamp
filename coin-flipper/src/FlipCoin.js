@@ -5,16 +5,6 @@ import './FlipCoin.css';
 import Footer from './Footer';
  
 class FlipCoin extends Component{
-  static defaultProps = {
-//     coins : [
-     
-//       // Sides of the coin
-//       {side:'head', imgSrc:
-// 'https://www.moneymetals.com/images/products/American-Silver-Eagle.jpg'},
-//       {side:'tail', imgSrc:
-// 'https://www.moneymetals.com/images/products/silver-eagle-coin-reverse.jpg'}
-//     ]
-  }
  
   constructor(props){
     super(props)
