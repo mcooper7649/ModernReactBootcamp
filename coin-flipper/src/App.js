@@ -25,8 +25,8 @@ class App extends Component {
                 crossorigin="anonymous"
           />
           <script src="https://kit.fontawesome.com/8cc1b75eb3.js" crossorigin="anonymous"></script>
-          <title>Coin Flipper App</title>
         </Helmet>
+        <h1>Flip A Coin'</h1>
       <Flipcoin />
     </div>
   );
