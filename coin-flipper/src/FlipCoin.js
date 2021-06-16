@@ -134,11 +134,11 @@ class FlipCoin extends Component{
 }
 
   render(){
-    const {currFace, totalFlips, heads, flipping, defaultFace } = this.state
+    const {currFace, totalFlips, heads, flipping} = this.state
     return(
       <div className="flipcoin">
         <h2 className="coin-title">Let's flip a coin</h2>
-         <img className={this.state.hidden ? "hidden" : "Coin"} src="https://www.moneymetals.com/images/products/American-Silver-Eagle.jpg" />
+         <img className={this.state.hidden ? "hidden" : "Coin"} src="https://www.moneymetals.com/images/products/American-Silver-Eagle.jpg" alt="American Silver Eagle" />
         {/* If current face exist then show current face */}
         {currFace && <Coin info={currFace} flipping={flipping} />}
          
