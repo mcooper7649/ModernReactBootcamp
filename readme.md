@@ -1823,3 +1823,300 @@ constructor
     - Custom BG Styles
     - Additional Coins
     - Multiple Fonts
+
+
+## Events in React
+--
+
+1. Commonly Used React Events
+    - Goals
+        - Attach Event handlers to components in React
+        - Use method binding to preserve the this context with event handlers
+        - Pass event handlers down as props to child components
+        - Understanding the key porp that React Asks for
+
+2. React Events Review
+    - You Can attach event handlers to HTML elements in React via special reservede attributes.
+    - You can do this in vanilla JS too, though the syntax is a bit different
+
+3. Event Attributes
+    - Any Event you can listen for in JS, you can listen for in React
+        - Mouse Events: onClick, onMouseOver, etc
+        - Form Events: onSubmit, etc
+        - Keyboard Events: onKeyDown, onKeyUp, onKeyPress
+
+4.  React Events can be found on the React Documention
+    - They are not unique to react and you can learn more about the events on the mdn site.
+    - Below is an example of how to output an single message in an array to the console onMouseEnter
+
+
+example of onMouseEnter Event
+```
+class WiseSquare extends Component {
+    dispenseWisdom({
+        let message = [
+            "message1",
+            "message2",
+            "message3",
+        ];
+        let rIndex = Math.floor(Math.Random() * messages.length);
+        console.log(messages[rIndex])
+    })
+    render(){
+        return (
+            <div className="WiseSquare"
+            onMouseEnter={this.dispenseWisdom}>
+            :)
+            </div>
+            
+        )
+    }
+}
+
+export default WiseSquare;
+```
+
+5. React Form Events
+--
+[https://reactjs.org/docs/events.html](https://reactjs.org/docs/events.html)
+
+
+1. onKeyDown
+    - When on key click
+2. onKeyPress
+    - both on keydown and keyup
+3. onKeyUp
+    - When key is released
+
+* Common Mouse Events:
+onClick onContextMenu onDoubleClick onDrag onDragEnd onDragEnter onDragExit
+onDragLeave onDragOver onDragStart onDrop onMouseDown onMouseEnter onMouseLeave
+onMouseMove onMouseOut onMouseOver onMouseUp
+
+* Common Form Events:
+onChange onInput onInvalid onReset onSubmit 
+
+* Generic Vents
+onError onLoad
+
+example of a form with event using keycode and keyUp evt
+```
+class AnnoyingForm extends Compoent {
+    handleKeyUp(evt){
+        if(evt.keyCode === 56){
+            alert("********** I LOVE THE * CHARACTER ***********")
+        } else {
+            alert("BOO")
+        }
+    }
+    render(){
+        return (
+            <div>
+            <h3>Try Typing In Here: </h3>
+            <textarea onKeyUp={this.handleKeyUp}>
+            </div>
+        )
+    }
+}
+export default AnnoyingForm;
+```
+
+4. onCopy is an event that can be triggered when someone tries to copy something. 
+- onCopy={this.handleCopy}
+
+
+
+## Method Binding
+--
+
+
+1. The keyword 'this'
+    - When your event handlers reference the keyword this, watch out!
+    - Without Binding you will lsoe the this context when you pass a function as ahandler
+    - Let's see what happens when we try to move our quotes into defaultProps
+
+2. Fixing our binding
+    - There are three ways to fix this:
+        1. use bind inline
+            - Pros
+                - Very Explicit
+            - Cons
+                - What if you need to pass this.dispenseWisdom to multiple components?
+                - new function created on every render
+        inline binding example       
+        ```
+        <div className="WiseSquare"
+            onMouseEnter={this.dispenseWisdom.bind(this)} >
+            </div>
+        ```
+
+        2. use an arrow function
+            - Pros
+                - No Mention of bind
+            - Cons
+                - Intent less clear
+                - What if you need to pass to multiple components?
+                - new fucntion created on every render
+
+        ```
+        <div
+            onMouseEnter={()=> this.dispenseWisdom()}
+        </div>
+        ```
+        3. binding in the constructor
+            - Pros
+                - Only need to bind once
+                - More performant
+            - Cons
+                - Ugly
+
+        ```
+        class WiseSquareWithProps extends Component {
+            constructor(props){
+                super(props);
+                this.dispenseWisdom = this.dispenseWidsdom.bind(this);
+            }
+        }
+        ```
+    
+## Binding With Arguments
+--
+
+1. Method Binding with Arguments
+    - In our previous examples, this.dispenseWisdom didn't take any arguments
+    - But what if we need to pass an argument?
+    - In our example we had an array of default colors as the props
+    - we then had a div with the bvg colors set to this.state.color
+    - after the div we mapped through our colors array and
+        - created an object that stored the bgcolor as css
+        - then returned a button for each element in the array
+        - each button style was set to the object
+        - each button onClick was binded to this.changeColor.bind(this,c)
+            - c was the iterator variable
+
+
+## Passing Functions to Child Components
+--
+
+1. a very common pattern in React
+2. The Idea: children are often not stateful but need to tell parents to chane state
+3. How do we send data "back up" to the parent?
+    - A parent component defines a function
+    - The function is passed as a prop to a child component
+    - The child component invokes the prop
+    - The parent function is called, usually setting a new state
+4. The parent fucntion is called, usually setting new state
+5. the parent component is re-rendered along with its children
+
+
+```
+class NumberList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { nums: [1, 2, 3, 4, 5] };
+  }
+
+  remove(num) {
+    this.setState(st => ({
+      nums: st.nums.filter(n => n !== num)
+    }));
+  }
+
+  render() {
+    let nums = this.state.nums.map(n => (
+      <NumberItem value={n} remove={() => this.remove(n)} />
+    ));
+    return (
+      <div>
+        <h1>First Number List</h1>
+        <ul>{nums}</ul>
+      </div>
+    );
+  }
+}
+```
+
+6. REMEMBER
+    - Passing a method as a prop will need to be called via handler abstractly
+
+
+## How Data Flows
+--
+
+1. A Parent component defiens a function
+2. The function is passed as a prop to a child component
+3. The child component invokes the prop
+4. The parent fucntion is called, usually setting new state
+
+## Where to bind?
+--
+
+1. The higher the better - don't bind in the child component if needed
+2. if you need a parameter, pass it down to the child as a prop, then bind in the parent and child
+3. Avoid inline arrow function/ binding inside of render, if possible
+4. No need to bind int he constructor and make an inline function
+5. If you get stuck, don't worry about performance just try to get the communcation working
+    - You can always refactor later
+
+## Naming Conventions
+1. You can call these handlers whatever you want - React don't care
+2. For consistency, try to follow the action/handleAction pattern:
+    - In the parent, give the fucntion a name corresponding to the behavior(remove, add, open, toggle, etc)
+    - In the child, use the name of hte action along with 'handle' (handleRemove, handleAdd, handleOpen, handleToggle, etc)
+
+3. In our example we had remove() in the parent that was passed as remove the prop
+    - inside our child we had handeRemove
+        - we call this.props.remove()
+        - and we had our button with onClick{this.handleRemove}
+
+## Lists and Keys
+--
+
+1. We've been getting a warning in our console "Warning: Each child in an array or iterator should have a unique 'key' prop
+
+2. key is a special string attribut to include when creating lists of elements
+
+3. Keys help identify which items have beenn changed, added or removed
+
+## Adding Keys
+```
+class NumberList extends Component {
+    render(){
+        const nums = this.state.nums.map(n=> {
+            <NumberItem value={n}
+                key={n}
+                remove={this.remove}
+                />
+        })
+    }
+}
+```
+
+1. We can see in our example we are setting our value n to be the key
+    - This works in this case, when the data is Unique
+    
+2. We need to create a unique key for it work properly
+    - Duplicate keys are problematic
+    
+3. Picking a key
+    - Best way: use a string that unqiue identifies item among siblings
+    - Most often you would use ID's from yoru data as keys
+
+4. Last Resort
+    - When you don't have stable ID's for rendered items,
+    you may use the iteration index as a key as a last resort
+    - If the data changes it can cause bugs
+
+setting the iterator as the key
+```
+class NumberList extends Component {
+    render(){
+        const nums = this.state.nums.map(n, idx => {
+            <NumberItem value={n}
+                key={idx}
+                remove={this.remove}
+                />
+        })
+    }
+}
+```
