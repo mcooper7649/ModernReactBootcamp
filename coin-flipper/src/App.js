@@ -24,9 +24,8 @@ class App extends Component {
                 integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
                 crossorigin="anonymous"
           />
-          <script src="https://kit.fontawesome.com/8cc1b75eb3.js" crossorigin="anonymous"></script>
+          {/* <script src="https://kit.fontawesome.com/8cc1b75eb3.js" crossorigin="anonymous"></script> */}
         </Helmet>
-        <h1>Flip A Coin'</h1>
       <Flipcoin />
     </div>
   );
