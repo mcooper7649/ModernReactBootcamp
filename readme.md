@@ -1807,4 +1807,19 @@ constructor
             - One will have all the logic
             - Use downward data flow
 
-2. Part 2: 
+2. Part 2:  Steps Involved
+    - Create Directory, CRA, and install dependencies
+    - Configure Coin.js to display coins
+    - Configure logic for coin in FlipCoin.js
+    - Setup Button to have a onClick 
+    - Configure Metrics using Row, Col, Container, from react-bootstrap
+    - Add Additional Coin Buttons
+        - Added setState with elseIf logic on button event click
+
+3. Part 3: Make it yours
+    - Download React (my Idea)
+    - Use Animations
+    - Add Sounds
+    - Custom BG Styles
+    - Additional Coins
+    - Multiple Fonts
