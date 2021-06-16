@@ -1,5 +1,5 @@
-.Color {
+.Box {
     border: 1px solid black;
-    width: 13rem;
-    height: 13rem;
+    width: 20em;
+    height: 20em;
 }
