@@ -12,7 +12,7 @@ class App extends Component {
           <meta charset="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content="#000000" />
-          <meta name="image" property="og:image" content="https://image.prntscr.com/image/49-twJzQQQmfKOTfO78iFQ.png" />
+          <meta name="image" property="og:image" content="https://image.prntscr.com/image/C9t5t52OSkK_7Hxx1SaYQw.png" />
           <meta name="description" property="og:description" content="Coin Flipper | A Many Faced Coin Flipping Application" />
           <meta name="author" content="Michael Cooper" />
           <meta name="publish_date" property="og:publish_date" content="2021-06-15T00:00:00-0600"></meta>
