@@ -1,14 +1,16 @@
+
+@import url("https://fonts.googleapis.com/css?family=Coming+Soon");
 .Hangman {
-  width: 400px;
+  width: 800px;
   color: black;
   text-align: center;
-  zoom: 1.3;
 }
 
 .Hangman img {
   border: 10px solid white;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.27),
     0 0 40px rgba(0, 0, 0, 0.06) inset;
+  width: 25%
 }
 
 .Hangman h1 {
@@ -27,11 +29,11 @@
 .Hangman-btns {
   text-align: center;
   display: inline-block;
-  width: 250px;
+  width: 500px;
   margin-top: 0;
-}
+} 
 
-.Hangman button {
+.Hangman .keyboard {
   border: none;
   font-family: inherit;
   font-size: 1rem;
@@ -55,4 +57,32 @@
   background: #bdbdbd;
   color: #eeeeee;
   box-shadow: 0 6px #9e9e9e;
+}
+
+.Hangman-count {
+  font-size: 1.2rem;
+}
+
+.reset-game-btn {
+  border: none;
+  font-size: 1.3rem;
+  font-family: "Coming Soon", cursive;
+  width: auto;
+  display: block;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  background: #ffc107;
+  box-shadow: 0 6px #ff9800;
+  border-radius: 5px;
+  color: #fff;
+  padding: 5px 10px;
+}
+
+
+#reset:hover {
+  background-color: red;
+  box-shadow: 0 6px crimson;
+
 }
