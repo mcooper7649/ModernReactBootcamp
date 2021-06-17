@@ -30,11 +30,6 @@ class Hangman extends Component {
       this.setState(st => ({
       gameOver: st.gameOver = true
       }));
-      // let audio = new Audio("./ending_mario.mp3")
-      // const start = () => {
-      //     audio.play()
-      //   }
-      //   start();
       console.log("Loser")
     } else {
       let audio = new Audio("./wrong.mp3")
@@ -52,11 +47,6 @@ class Hangman extends Component {
     console.log(this.state.guessed)
 
     if(this.state.winner){
-      // let audio = new Audio("./ending_mario.mp3")
-      // const start = () => {
-      //     audio.play()
-      //   }
-      //   start();
         console.log("Winner")
     }else {
     let audio = new Audio("./correct.mp3")
