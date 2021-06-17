@@ -25,7 +25,8 @@ class FlipCoin extends Component{
         'https://www.moneymetals.com/images/products/American-Silver-Eagle.jpg'},
         {side:'tail', imgSrc:
         'https://www.moneymetals.com/images/products/silver-eagle-coin-reverse.jpg'}
-      ]
+      ],
+      easterEgg: [""],
     }
      
     // Binding context of this keyword
@@ -55,6 +56,7 @@ class FlipCoin extends Component{
         hidden: true
       }
     })
+    
 
     let audio = new Audio("./cointoss.mp3")
     const start = () => {
@@ -68,14 +70,20 @@ class FlipCoin extends Component{
       }) 
    }, 500);
   }
+
+  easterEgg(){
+    const newMessage = this.choice(this.state.easterEgg)
+    console.log(newMessage)
+  }
+
+
  
   handleClick(){
-
+    this.easterEgg()
     this.flipCoin()
   }
 
   handleChange(e){
-    console.log(e.target.value)
     if (e.target.value === "Buffalo"){
       this.setState(curState => ({  
         coins: [
@@ -107,8 +115,22 @@ class FlipCoin extends Component{
         'https://i5.walmartimages.com/asr/dc138d7c-b976-40e1-9de1-ff762b46c6be.6134354d0148619c4e95bc5d0be297c2.jpeg?odnWidth=1000&odnHeight=1000&odnBg=ffffff'},
         {side:'tail', imgSrc:
         'https://images.ontheedgebrands.com/cdn-cgi/image/f=auto,quality=60/images/C35-BK4748.jpg'}
+      ],
+      easterEgg: [
+        "Let's Make America Great Again",
+        "Head or Tail? Sounds, like a Win-Win",
+        "Lets Party Gay Boys!!!",
+        "CHINA VIRUS",
+        "You're Fired!!",
+        "Sleepy Joe is a fraud",
+        "My name is Alex Garcia, and I approve this message"
       ]
     }));
+    setTimeout(() => {
+      this.setState({
+          easterEgg: [""]
+      }) 
+   }, 5000);
 }else if(e.target.value === "Original"){
   this.setState(curState => ({  
     coins: [
