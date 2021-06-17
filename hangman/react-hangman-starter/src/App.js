@@ -12,8 +12,8 @@ class App extends Component {
           <meta charset="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content="#000000" />
-          <meta name="image" property="og:image" content="" />
-          <meta name="url" property="og:url" content="" />
+          <meta name="image" property="og:image" content="https://image.prntscr.com/image/yiujgjgzSHqyxvP8UAlb1w.png" />
+          <meta name="url" property="og:url" content="https://zen-bhaskara-0d6cd4.netlify.app/" />
           <meta name="description" property="og:description" content="Hangman | Classic Hangman Game" />
           <meta name="author" content="Michael Cooper" />
           <meta name="publish_date" property="og:publish_date" content="2021-06-17T00:00:00-0600"></meta>
