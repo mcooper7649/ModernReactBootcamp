@@ -2120,3 +2120,46 @@ class NumberList extends Component {
     }
 }
 ```
+
+## Hangman Challenge
+--
+
+1. Iniital Setup
+    - From bootcamp materials, cop the 'react-hangman-starter'
+    - npm i
+    - npm run start
+
+2. Fix Keys in Buttons
+
+3. Number of Wrong Guesses
+    - Above the Currently-Guessed word, we'd like to show the number of wrong guesses, like "Number wrong: 3" add ths
+
+4. End Game on Loss
+    - The game only comes (by default) with 6 gallows images. However it allows players to keep making guess after this (and theres a bug, in that the gallows images disappears after there are too many wrong)
+
+5. Add Alt text to images so impaired users can used your site
+
+6. Use a Random Word
+    - using the supplied words.js and code
+        - generate a random word instead of apple
+
+7. Adding a Reset Button
+    - Add reset button with this.handleClick
+        - handleClick calls this resetGame
+
+8. Configure Reset Game
+
+    - setState to default values without making curr copy
+```
+resetGame(){
+    this.setState(st => ({
+      nWrong: 0, guessed: new Set(), answer: randomWord(), gameOver: false, winner: false 
+    }));
+```
+
+9. Add Styling and Audio to maek it your own.
+    - Wasn't that fun?
+
+
+
+See ModernReactBootcampPart2 for next Read me
